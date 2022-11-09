@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
-int itemCount = -1;
+int itemCount = -1, i;
+int elementPosision;
 float totalPrice = 0;
 struct pcBuild{
     char itemName[100];
@@ -304,70 +305,112 @@ void choosePowerSupply (void){
 
 }
 
+void deleteSelectedItem(void){
+    printf("Enter the element position to delete : ");
+    scanf("%d", &elementPosision);
+    /* Invalid delete position */
+    if(elementPosision <-1){
+        printf("Invalid position! Please enter position between 1 to %d", itemCount);
+    }
+    else{
+        /* Copy next element value to current element */
+        for(i=elementPosision-1; i<itemCount; i++)
+        {
+            //cusInfo.project[itemCount].price
+            //arr[i] = arr[i + 1];
+
+            cusInfo.project[i] = cusInfo.project[i+1];
+
+           // cusInfo.project[i].price = cusInfo.project[i+1].price;
+             //s            cusInfo.project[i].itemName = cusInfo.project[i+1].itemName;
+
+        }
+
+        /* Decrement array size by 1 */
+        printf("Deleted Successfully!\t Product Serial No ----\t>%d",elementPosision);
+        itemCount--;
+
+    }
+}
+
 void productListing (void){
-        int chooseProduct;
-        printf("\n\n Choose Your Option From Here: [1/2/3/4/5/6/7]");
-        printf("\n  [1] -- Monitor");
-        printf("\n  [2] -- Mother Board");
-        printf("\n  [3] -- Casing");
-        printf("\n  [4] -- Graphics Card");
-        printf("\n  [5] -- Processor");
-        printf("\n  [6] -- Power Supply");
-        printf("\n  [7] -- View Your Build With Price");
-        printf("\n Your Choose is: ");
-        scanf("%d", &chooseProduct);
-        //printf("Your Choose is : %d", chooseProduct);
-        switch(chooseProduct){
-            case 1:{
-                printf("\n Select Case 1");
-                chooseMonitor();
-                break;
-            }
-            case 2:{
-                printf("\n Select Case 2");
-                chooseMotherBoard();
-                break;
-            }
-            case 3:{
-                printf("\n Select Case 3");
-                chooseCasing();
-                break;
-            }
-            case 4:{
-                printf("\nSelect Case 4");
-                chooseGraphicsCard();
-                break;
-            }
-            case 5:{
-                printf("\nSelect Case 5");
-                chooseProcessor();
-                break;
-            }
-            case 6:{
-                printf("Select Case 6");
-                choosePowerSupply();
-                break;
-            }
-            case 7:{
-                if(itemCount>=0){
-                    printf("\nSelect Case 7\n\n");
-                    printf("It's Your Build: \n");
-                    for(int i=0; i<=itemCount; i++){
-                        totalPrice = totalPrice + cusInfo.project[i].price;
-                        //fputs(cusInfo.project[i].itemName,100,stdin);
-                        printf("\n\t%d -->  Product Name: %s\t\t\tPrice: %.2f",i+1,cusInfo.project[i].itemName,cusInfo.project[i].price);
+       int startProject = 1;
+       while(startProject == 1){
+            int chooseProduct;
+            printf("\n\n Choose Your Option From Here: [1/2/3/4/5/6/7]");
+            printf("\n  [1] -- Monitor");
+            printf("\n  [2] -- Mother Board");
+            printf("\n  [3] -- Casing");
+            printf("\n  [4] -- Graphics Card");
+            printf("\n  [5] -- Processor");
+            printf("\n  [6] -- Power Supply");
+            printf("\n  [7] -- Delete Item that you  selected");
+            printf("\n  [8] -- View Your Build With Price");
+            printf("\n Your Choose is: ");
+            scanf("%d", &chooseProduct);
+            //printf("Your Choose is : %d", chooseProduct);
+            switch(chooseProduct){
+                case 1:{
+                    printf("\n Select Case 1");
+                    chooseMonitor();
+                    break;
+                }
+                case 2:{
+                    printf("\n Select Case 2");
+                    chooseMotherBoard();
+                    break;
+                }
+                case 3:{
+                    printf("\n Select Case 3");
+                    chooseCasing();
+                    break;
+                }
+                case 4:{
+                    printf("\nSelect Case 4");
+                    chooseGraphicsCard();
+                    break;
+                }
+                case 5:{
+                    printf("\nSelect Case 5");
+                    chooseProcessor();
+                    break;
+                }
+                case 6:{
+                    printf("Select Case 6");
+                    choosePowerSupply();
+                    break;
+                }
+                case 7: {
+                    deleteSelectedItem();
+                    break;
+                }
+                case 8:{
+                    totalPrice = 0;
+                    if(itemCount>=0){
+                        printf("\nSelect Case 8\n\n");
+                        printf("It's Your Build: \n");
+                        for(int i=0; i<=itemCount; i++){
+                            totalPrice = totalPrice + cusInfo.project[i].price;
+                            //fputs(cusInfo.project[i].itemName,100,stdin);
+                            printf("\n\t%d -->  Product Name: %s\t\t\tPrice: %.2f",i+1,cusInfo.project[i].itemName,cusInfo.project[i].price);
+                        }
+                        printf("\n  ===============================================================================================", totalPrice);
+                        printf("\n\tTotal Product: %d", itemCount+1);
+                        printf("\t\t\t\t\t\t  Total Price: %.2f", totalPrice);
+                    }else{
+                        printf("\n No Product Selected Yet. Please Select Product\n");
+                        productListing();
                     }
-                    printf("\n  ===============================================================================================", totalPrice);
-                    printf("\n\tTotal Product: %d", itemCount+1);
-                    printf("\t\t\t\t\t\t  Total Price: %.2f", totalPrice);
-                }else{
-                    printf("\n No Product Selected Yet. Please Select Product\n");
-                    productListing();
+
+                    break;
+                }
+                default : {
+                     printf("Want to Continue the build? Press [1] to run and Press [0] to stop Building");
+                     scanf("%d",&startProject);
                 }
 
-                break;
             }
-        }
+       }
 
 }
 
