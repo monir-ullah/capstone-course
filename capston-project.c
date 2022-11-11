@@ -315,7 +315,7 @@ void deleteSelectedItem(void){
         if(elementPosition <-1){
             printf("Invalid position! Please enter position between 1 to %d", itemCount);
         }
-        else if(elementPosition<=itemCount){
+        else if(elementPosition<=itemCount+1){
             /* Copy next element value to current element */
             for(i=elementPosition-1; i<itemCount; i++){
                 cusInfo.project[i] = cusInfo.project[i+1];
