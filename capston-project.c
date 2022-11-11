@@ -333,6 +333,7 @@ void deleteSelectedItem(void){
 }
 
 void productListing (void){
+
             int chooseProduct;
             printf("\n\n Choose Your Option From Here: [1/2/3/4/5/6/7]");
             printf("\n  [1] -- Monitor");
@@ -450,13 +451,16 @@ void productListing (void){
                     }
                 }
             }
+
 }
 
 int main(){
+
     printf("\n\t\t\t===================== ** PC Building Project ** =====================");
     printf ("\n\n Enter Your Name: ");
     gets(cusInfo.customerName);
     productListing();
     printf("\n\n\n\n");
     return 0;
+
 }
