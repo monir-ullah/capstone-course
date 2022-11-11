@@ -16,17 +16,6 @@ struct cInfo{
 
 // Functions
 
-// Want to Create New User Funcitons
-void newUser (void){
-        printf("\n\t\t\t===================== ** PC Building Project ** =====================");
-        printf ("\n\n Enter Your Name: ");
-        fgets(cusInfo.customerName,20,stdin);
-        //printf(" %s",cusInfo.customerName);
-        productListing();
-        printf("\n\n\n\n");
-        return 0;
-}
-
 
 // Monitor Function
 void chooseMonitor(void){
@@ -319,30 +308,27 @@ void choosePowerSupply (void){
 }
 
 void deleteSelectedItem(void){
-    printf("Enter the element position to delete : ");
-    scanf("%d", &elementPosision);
-    /* Invalid delete position */
-    if(elementPosision <-1){
-        printf("Invalid position! Please enter position between 1 to %d", itemCount);
-    }
-    else{
-        /* Copy next element value to current element */
-        for(i=elementPosision-1; i<itemCount; i++)
-        {
-            //cusInfo.project[itemCount].price
-            //arr[i] = arr[i + 1];
+    if(itemCount>=0){
+        printf("Enter the element position to delete : ");
+        scanf("%d", &elementPosision);
+        /* Invalid delete position */
+        if(elementPosision <-1){
+            printf("Invalid position! Please enter position between 1 to %d", itemCount);
+        }
+        else{
+            /* Copy next element value to current element */
+            for(i=elementPosision-1; i<itemCount; i++){
+                cusInfo.project[i] = cusInfo.project[i+1];
+            }
 
-            cusInfo.project[i] = cusInfo.project[i+1];
-
-           // cusInfo.project[i].price = cusInfo.project[i+1].price;
-             //s            cusInfo.project[i].itemName = cusInfo.project[i+1].itemName;
+            /* Decrement array size by 1 */
+            printf("Deleted Successfully!\t Product Serial No ----\t>%d",elementPosision);
+            itemCount--;
 
         }
-
-        /* Decrement array size by 1 */
-        printf("Deleted Successfully!\t Product Serial No ----\t>%d",elementPosision);
-        itemCount--;
-
+    }else{
+        printf("You Have Nothing to Delete. Select Your Product");
+        productListing();
     }
 }
 
@@ -407,77 +393,74 @@ void productListing (void){
                             //fputs(cusInfo.project[i].itemName,100,stdin);
                             printf("\n\t%d -->  Product Name: %s\t\t\tPrice: %.2f",i+1,cusInfo.project[i].itemName,cusInfo.project[i].price);
                         }
-                        printf("\n  ===============================================================================================", totalPrice);
+                        printf("\n  =============================================================================================== ");
                         printf("\n\tTotal Product: %d", itemCount+1);
                         printf("\t\t\t\t\t\t  Total Price: %.2f", totalPrice);
+                        productListing();
                     }else{
-                        printf("\n No Product Selected Yet. Please Select Product\n");
+                        printf("\n No Product Selected Yet to View your Build. Please Select Product\n");
                         productListing();
                     }
-                    productListing();
+
                     break;
                 }
                 case 9:{
-                    totalPrice = 0;
-                    FILE *fp;
-                    fp = fopen("file.txt", "a+");
-                    fprintf(fp,"\n\n\n\n\n\n");
-                    fclose(fp);
-                    fp = fopen("file.txt", "a+");
-                    fprintf(fp,"\n\t\t\t===================== ** Customer Name : %s\n",cusInfo.customerName);
-                    fclose(fp);
-                    for(int i=0; i<=itemCount; i++){
-                            totalPrice = totalPrice + cusInfo.project[i].price;
-                            //fputs(cusInfo.project[i].itemName,100,stdin);
+                    if(itemCount>=0){
+                        totalPrice = 0;
+                        FILE *fp;
+                        fp = fopen("file.txt", "a+");
+                        fprintf(fp,"\n\n\n\n\n\n");
+                        fclose(fp);
+                        fp = fopen("file.txt", "a+");
+                        fprintf(fp,"\n\t\t\t===================== ** Customer Name : %s\n",cusInfo.customerName);
+                        fclose(fp);
+                        for(int i=0; i<=itemCount; i++){
+                                totalPrice = totalPrice + cusInfo.project[i].price;
+                                fp = fopen("file.txt", "a+");
+                                fprintf(fp,"\n\t%d -->  Product Name: %s\t\t\tPrice: %.2f",i+1,cusInfo.project[i].itemName,cusInfo.project[i].price);
+                                fclose(fp);
+                            }
                             fp = fopen("file.txt", "a+");
-                            fprintf(fp,"\n\t%d -->  Product Name: %s\t\t\tPrice: %.2f",i+1,cusInfo.project[i].itemName,cusInfo.project[i].price);
+                            fprintf(fp,"\n  ===============================================================================================");
                             fclose(fp);
-                            //printf("\n\t%d -->  Product Name: %s\t\t\tPrice: %.2f",i+1,cusInfo.project[i].itemName,cusInfo.project[i].price);
-                        }
-                        fp = fopen("file.txt", "a+");
-                        fprintf(fp,"\n  ===============================================================================================", totalPrice);
-                        fclose(fp);
-                        fp = fopen("file.txt", "a+");
-                        fprintf(fp,"\n\tTotal Product: %d", itemCount+1);
-                        fclose(fp);
-                        fp = fopen("file.txt", "a+");
-                        fprintf(fp,"\t\t\t\t\t\t\t\tTotal Price: %.2f", totalPrice);
-                        fclose(fp);
-                    printf("You have Saved your build Success fully!!!!\n");
-
-                   // break;
-                }
-                case 10 :{
-                    int createNewUser;
-                     printf("Want to Create new user build?\nPress [1] to run and Press [0] to stop Building : ");
-                     scanf("%d",&createNewUser);
-                     if(createNewUser == 0){
-                        exit(0);
-                     }else if(createNewUser == 1){
-                        itemCount = -1;
-                        newUser();
-                     }else{
-                        printf("You Press the Wrong key! Start the program, Again from the Very Beginning");
-                     }
-                     break;
-
+                            fp = fopen("file.txt", "a+");
+                            fprintf(fp,"\n\tTotal Product: %d", itemCount+1);
+                            fclose(fp);
+                            fp = fopen("file.txt", "a+");
+                            fprintf(fp,"\t\t\t\t\t\t\t\tTotal Price: %.2f", totalPrice);
+                            fclose(fp);
+                        printf("You have Saved your build Success fully!!!!\n");
+                        productListing();
+                    }else{
+                         printf("\n Nothing to Save. Please Select Product then save\n");
+                        productListing();
+                    }
+                   break;
                 }
                 default : {
-
+                    printf("\n You Select Default. Now the program will stop. See U Later\n\n\n\n\n");
+                    int start;
+                    printf("\nAgain Asking. Do you want to start restart to program?\n");
+                    printf("\nPress 1 to restart and Press anything to stop the program\n");
+                    scanf("%d",start);
+                    if(start==1){
+                        printf("\nThanks you coming back! Select your product now!");
+                    }else{
+                        printf("\n Finally Stop the program.See U Later\n\n\n\n\n \n");
+                        exit(0);
+                    }
                 }
-
-
-
-
-                //}
             }
 
 }
 
 int main(){
 
-    //system("color 2e");
-
-    newUser(); // Calling the immediate function
+    printf("\n\t\t\t===================== ** PC Building Project ** =====================");
+    printf ("\n\n Enter Your Name: ");
+    gets(cusInfo.customerName);
+    productListing();
+    printf("\n\n\n\n");
+    return 0;
 
 }
