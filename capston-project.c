@@ -333,7 +333,6 @@ void deleteSelectedItem(void){
 }
 
 void productListing (void){
-
             int chooseProduct;
             printf("\n\n Choose Your Option From Here: [1/2/3/4/5/6/7]");
             printf("\n  [1] -- Monitor");
