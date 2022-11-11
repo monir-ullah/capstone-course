@@ -381,6 +381,7 @@ void productListing (void){
                 }
                 case 7: {
                     deleteSelectedItem();
+                    productListing();
                     break;
                 }
                 case 8:{
