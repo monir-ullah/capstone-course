@@ -326,7 +326,8 @@ void deleteSelectedItem(void){
             itemCount--;
 
         }else{
-            printf("Invalid Option");
+            printf("Invalid Option. Choose the right option");
+            deleteSelectedItem();
         }
     }else{
         printf("You Have Nothing to Delete. Select Your Product");
@@ -443,7 +444,7 @@ void productListing (void){
                    break;
                 }
                 case 10:{
-                    printf("Ending the Program. See You Later. Thanks for choosing Connex PC Building Solution   ");
+                    printf("Ending the Program. Thanks for choosing Connex PC Building Solution.See You Later.  ");
                     exit(0);
                 }
                 default : {
