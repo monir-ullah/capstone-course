@@ -334,120 +334,120 @@ void deleteSelectedItem(void){
 
 void productListing (void){
 
-    int chooseProduct;
-    printf("\n\n Choose Your Option From Here: [1/2/3/4/5/6/7/8/9/10]");
-    printf("\n  [1]  -- Monitor");
-    printf("\n  [2]  -- Mother Board");
-    printf("\n  [3]  -- Casing");
-    printf("\n  [4]  -- Graphics Card");
-    printf("\n  [5]  -- Processor");
-    printf("\n  [6]  -- Power Supply");
-    printf("\n  [7]  -- Delete selected item");
-    printf("\n  [8]  -- View Your Build With Price");
-    printf("\n  [9]  -- Save As file");
-    printf("\n  [10] -- Exit the Program");
-    printf("\n Your Choose is: ");
-    scanf("%d", &chooseProduct);
-    switch(chooseProduct){
-        case 1:{
-            printf("\n Select Case 1");
-            chooseMonitor();
-            break;
-        }
-        case 2:{
-            printf("\n Select Case 2");
-            chooseMotherBoard();
-            break;
-        }
-        case 3:{
-            printf("\n Select Case 3");
-            chooseCasing();
-            break;
-        }
-        case 4:{
-            printf("\nSelect Case 4");
-            chooseGraphicsCard();
-            break;
-        }
-        case 5:{
-            printf("\nSelect Case 5");
-            chooseProcessor();
-            break;
-        }
-        case 6:{
-            printf("Select Case 6");
-            choosePowerSupply();
-            break;
-        }
-        case 7: {
-            deleteSelectedItem();
-            productListing();
-            break;
-        }
-        case 8:{
-            totalPrice = 0;
-            if(itemCount>=0){
-                printf("\nSelect Case 8\n\n");
-                printf("It's Your Build: \n");
-                for(int i=0; i<=itemCount; i++){
-                    totalPrice = totalPrice + cusInfo.project[i].price;
-                    printf("\n\t%d -->  Product Name: %s\t\t\tPrice: %.2f",i+1,cusInfo.project[i].itemName,cusInfo.project[i].price);
+            int chooseProduct;
+            printf("\n\n Choose Your Option From Here: [1/2/3/4/5/6/7/8/9/10]");
+            printf("\n  [1]  -- Monitor");
+            printf("\n  [2]  -- Mother Board");
+            printf("\n  [3]  -- Casing");
+            printf("\n  [4]  -- Graphics Card");
+            printf("\n  [5]  -- Processor");
+            printf("\n  [6]  -- Power Supply");
+            printf("\n  [7]  -- Delete selected item");
+            printf("\n  [8]  -- View Your Build With Price");
+            printf("\n  [9]  -- Save As file");
+            printf("\n  [10] -- Exit the Program");
+            printf("\n Your Choose is: ");
+            scanf("%d", &chooseProduct);
+            switch(chooseProduct){
+                case 1:{
+                    printf("\n Select Case 1");
+                    chooseMonitor();
+                    break;
                 }
-                printf("\n  =============================================================================================== ");
-                printf("\n\tTotal Product: %d", itemCount+1);
-                printf("\t\t\t\t\t\t  Total Price: %.2f", totalPrice);
-                productListing();
-            }else{
-                printf("\n No Product Selected Yet to View your Build. Please Select Product\n");
-                productListing();
-            }
-
-            break;
-        }
-        case 9:{
-            if(itemCount>=0){
-                totalPrice = 0;
-                FILE *fp;
-                fp = fopen("file.txt", "a+");
-                fprintf(fp,"\n\n\n\n\n\n");
-                fclose(fp);
-                fp = fopen("file.txt", "a+");
-                fprintf("\n\t\t\t===================== ** Connex PC Building Solution ** =====================");
-                fclose(fp);
-                fp = fopen("file.txt", "a+");
-                fprintf(fp,"\n\t\t\t===================== ** Customer Name : %s\n",cusInfo.customerName);
-                fclose(fp);
-                for(int i=0; i<=itemCount; i++){
-                        totalPrice = totalPrice + cusInfo.project[i].price;
-                        fp = fopen("file.txt", "a+");
-                        fprintf(fp,"\n\t%d -->  Product Name: %s\t\t\tPrice: %.2f",i+1,cusInfo.project[i].itemName,cusInfo.project[i].price);
-                        fclose(fp);
+                case 2:{
+                    printf("\n Select Case 2");
+                    chooseMotherBoard();
+                    break;
+                }
+                case 3:{
+                    printf("\n Select Case 3");
+                    chooseCasing();
+                    break;
+                }
+                case 4:{
+                    printf("\nSelect Case 4");
+                    chooseGraphicsCard();
+                    break;
+                }
+                case 5:{
+                    printf("\nSelect Case 5");
+                    chooseProcessor();
+                    break;
+                }
+                case 6:{
+                    printf("Select Case 6");
+                    choosePowerSupply();
+                    break;
+                }
+                case 7: {
+                    deleteSelectedItem();
+                    productListing();
+                    break;
+                }
+                case 8:{
+                    totalPrice = 0;
+                    if(itemCount>=0){
+                        printf("\nSelect Case 8\n\n");
+                        printf("It's Your Build: \n");
+                        for(int i=0; i<=itemCount; i++){
+                            totalPrice = totalPrice + cusInfo.project[i].price;
+                            printf("\n\t%d -->  Product Name: %s\t\t\tPrice: %.2f",i+1,cusInfo.project[i].itemName,cusInfo.project[i].price);
+                        }
+                        printf("\n  =============================================================================================== ");
+                        printf("\n\tTotal Product: %d", itemCount+1);
+                        printf("\t\t\t\t\t\t  Total Price: %.2f", totalPrice);
+                        productListing();
+                    }else{
+                        printf("\n No Product Selected Yet to View your Build. Please Select Product\n");
+                        productListing();
                     }
-                    fp = fopen("file.txt", "a+");
-                    fprintf(fp,"\n  ===============================================================================================");
-                    fclose(fp);
-                    fp = fopen("file.txt", "a+");
-                    fprintf(fp,"\n\tTotal Product: %d", itemCount+1);
-                    fclose(fp);
-                    fp = fopen("file.txt", "a+");
-                    fprintf(fp,"\t\t\t\t\t\t\t\tTotal Price: %.2f", totalPrice);
-                    fclose(fp);
-                printf("You have Saved your build Success fully!!!!\n");
-                productListing();
-            }else{
-                    printf("\n Nothing to Save. Please Select Product then save\n");
-                productListing();
-            }
-            break;
-        }
-        default : {
-                printf("Ending the Program. See U Later. ")
-                exit(0);
-            }
-        }
-    }
 
-}
+                    break;
+                }
+                case 9:{
+                    if(itemCount>=0){
+                        totalPrice = 0;
+                        FILE *fp;
+                        fp = fopen("file.txt", "a+");
+                        fprintf(fp,"\n\n\n\n\n\n");
+                        fclose(fp);
+                        fp = fopen("file.txt", "a+");
+                        fprintf(fp,"\n\t\t\t===================== ** Connex PC Building Solution ** =====================");
+                        fclose(fp);
+                        fp = fopen("file.txt", "a+");
+                        fprintf(fp,"\n\t\t\t===================== ** Customer Name : %s\n",cusInfo.customerName);
+                        fclose(fp);
+                        for(int i=0; i<=itemCount; i++){
+                                totalPrice = totalPrice + cusInfo.project[i].price;
+                                fp = fopen("file.txt", "a+");
+                                fprintf(fp,"\n\t%d -->  Product Name: %s\t\t\tPrice: %.2f",i+1,cusInfo.project[i].itemName,cusInfo.project[i].price);
+                                fclose(fp);
+                            }
+                            fp = fopen("file.txt", "a+");
+                            fprintf(fp,"\n  ===============================================================================================");
+                            fclose(fp);
+                            fp = fopen("file.txt", "a+");
+                            fprintf(fp,"\n\tTotal Product: %d", itemCount+1);
+                            fclose(fp);
+                            fp = fopen("file.txt", "a+");
+                            fprintf(fp,"\t\t\t\t\t\t\t\tTotal Price: %.2f", totalPrice);
+                            fclose(fp);
+                        printf("You have Saved your build Success fully!!!!\n");
+                        productListing();
+                    }else{
+                         printf("\n Nothing to Save. Please Select Product then save\n");
+                        productListing();
+                    }
+                   break;
+                }
+                default : {
+                        printf("Ending the Program. See U Later. ");
+                        exit(0);
+                    }
+                }
+            }
+
+
 
 int main(){
 
