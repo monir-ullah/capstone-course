@@ -3,7 +3,7 @@
 #include <conio.h>
 #include <string.h>
 int itemCount = -1, i;
-int elementPosision;
+int elementPosition;
 float totalPrice = 0;
 struct pcBuild{
     char itemName[100];
@@ -310,21 +310,23 @@ void choosePowerSupply (void){
 void deleteSelectedItem(void){
     if(itemCount>=0){
         printf("Enter the element position to delete : ");
-        scanf("%d", &elementPosision);
+        scanf("%d", &elementPosition);
         /* Invalid delete position */
-        if(elementPosision <-1){
+        if(elementPosition <-1){
             printf("Invalid position! Please enter position between 1 to %d", itemCount);
         }
-        else{
+        else if(elementPosition<itemCount){
             /* Copy next element value to current element */
-            for(i=elementPosision-1; i<itemCount; i++){
+            for(i=elementPosition-1; i<itemCount; i++){
                 cusInfo.project[i] = cusInfo.project[i+1];
             }
 
             /* Decrement array size by 1 */
-            printf("Deleted Successfully!\t Product Serial No ----\t>%d",elementPosision);
+            printf("Deleted Successfully!\t Product Serial No ----\t>%d",elementPosition);
             itemCount--;
 
+        }else{
+            printf("Invalid Option");
         }
     }else{
         printf("You Have Nothing to Delete. Select Your Product");
