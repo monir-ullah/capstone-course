@@ -432,7 +432,7 @@ void productListing (void){
                             fp = fopen("file.txt", "a+");
                             fprintf(fp,"\t\t\t\t\t\t\t\tTotal Price: %.2f", totalPrice);
                             fclose(fp);
-                        printf("You have Saved your build Success fully!!!!\n");
+                        printf("You have Saved your build Successfully!!!!\n");
                         productListing();
                     }else{
                          printf("\n Nothing to Save. Please Select Product then save\n");
@@ -441,8 +441,14 @@ void productListing (void){
                    break;
                 }
                 default : {
-                        printf("Ending the Program. See U Later. ");
-                        exit(0);
+
+                        if(chooseProduct==10){
+                            printf("Ending the Program. See You Later. Thanks for choosing Connex PC Building Solution   ");
+                            exit(0);
+                        }else{
+                            printf("\nInvalid Choice. Select From the option\n");
+                             productListing();
+                        }
                     }
                 }
             }
