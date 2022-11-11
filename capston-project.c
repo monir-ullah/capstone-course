@@ -440,15 +440,13 @@ void productListing (void){
                     }
                    break;
                 }
+                case 10:{
+                    printf("Ending the Program. See You Later. Thanks for choosing Connex PC Building Solution   ");
+                    exit(0);
+                }
                 default : {
-
-                        if(chooseProduct==10){
-                            printf("Ending the Program. See You Later. Thanks for choosing Connex PC Building Solution   ");
-                            exit(0);
-                        }else{
                             printf("\nInvalid Choice. Select From the option\n");
-                             productListing();
-                        }
+                            productListing();
                     }
                 }
             }
